@@ -12,7 +12,7 @@ def findCppFiles(sourcePath):
             continue
 
         for fileName in fileNames:
-            if fileName.endswith(('.cpp', '.h', '.cc', '.hpp', '.cxx', '.c')):
+            if fileName.endswith(('.cpp', '.h', '.cc', '.hpp', '.cxx', '.c', '.py', '.js', '.ts', '.java', '.cs')):
                 fullFilePath = os.path.join(rootDir, fileName)
                 cppFileList.append(fullFilePath)
 
@@ -22,12 +22,12 @@ def main():
     os.makedirs(reportDirectory, exist_ok=True)
     os.makedirs(cacheDirectory, exist_ok=True)
 
-    print("C++ Test Coverage Report Generator")
-    print("\nFinding C++ source files...")
+    print("Universal Code Coverage Report Generator")
+    print("\nFinding source code files...")
 
     discoveredFiles = findCppFiles(sourceDirectory)
     if not discoveredFiles:
-        print(f"No C++ files found in {sourceDirectory}. Exiting.")
+        print(f"No supported code files found in {sourceDirectory}. Exiting.")
         return
 
     print(f"  - Found {len(discoveredFiles)} files to analyze.")

@@ -1,7 +1,7 @@
 prompt_template: |
-  You are an expert C++ developer and software quality assurance engineer specializing in static code analysis, unit testing, and maintainability assessments.
+  You are an expert developer and software quality assurance engineer specializing in static code analysis, unit testing, and maintainability assessments.
 
-  Your task is to analyze the following single C++ source file and generate a comprehensive static code analysis report in **strict JSON format only**. Do **not** include any explanations, comments, markdown, or extra text—**only return a valid, parseable JSON object.**
+  Your task is to analyze the following single source code file and generate a comprehensive static code analysis report in **strict JSON format only**. Do **not** include any explanations, comments, markdown, or extra text—**only return a valid, parseable JSON object.**
 
   Use the structure and rules below to ensure completeness, accuracy, and clarity.
 
@@ -43,7 +43,7 @@ prompt_template: |
   }
 
   ---------------- INPUT ----------------
-  Here is the C++ code to analyze:
+  Here is the source code to analyze:
 
   CRITICAL REMINDER: Your entire response must be a single valid JSON object only.
   Do NOT wrap it in markdown code fences (no ```json). Do NOT add any text before or after the JSON.

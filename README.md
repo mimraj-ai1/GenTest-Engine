@@ -1,6 +1,6 @@
 # GenTest Engine
 
-**GenTest Engine** is an AI-powered static analysis tool for C++ projects that automatically generates test scenarios and predicts code coverage — **without compiling or executing any code**.
+**GenTest Engine** is an AI-powered static analysis tool for software projects that automatically generates test scenarios and predicts code coverage — **without compiling or executing any code**.
 
 > Built by **SK Mimraj**
 
@@ -8,9 +8,9 @@
 
 ## 🔍 What It Does
 
-GenTest Engine analyzes your C++ codebase and:
+GenTest Engine analyzes your codebase and:
 
-- Scans all `.cpp`, `.cc`, and `.h` files in the `src/` directory
+- Scans source code files in the `src/` directory
 - Sends each file to a local AI model (via [Ollama](https://ollama.ai) using **Qwen2.5-Coder 1.5B**) for expert-level static analysis
 - Predicts potential test cases and estimated code coverage — **no runtime execution needed**
 - Stores and reuses analysis using a **file-based caching system**
@@ -29,7 +29,7 @@ No compilers. No linkers. No build steps. Just smart analysis.
 | Auto-delete bad cache entries | ✅ Corrupt cache auto-cleared on next run |
 | Prompt JSON enforcement | ✅ Hardened with CRITICAL REMINDER footer |
 | Request timeout | ✅ 120s timeout per request |
-| Sample C++ test file | ✅ `calculator.cpp` included |
+| Sample test file | ✅ `calculator.cpp` included |
 | Lightweight Model | ✅ `qwen2.5-coder:1.5b` for memory stability |
 
 ---
@@ -39,7 +39,7 @@ No compilers. No linkers. No build steps. Just smart analysis.
 The tool follows a modular, build-free pipeline:
 
 1. **Initialization** — Run `python -m app.main` to start
-2. **Source Scanning** — Walks `src/` for `.cpp`, `.h`, `.cc` files
+2. **Source Scanning** — Walks `src/` for supported source files
 3. **Cache-First Workflow** — Reuses previous analysis if cached and valid
 4. **AI Analysis** — LLM returns structured JSON with coverage predictions
 5. **Reporting** — Markdown + YAML + terminal summary generated
@@ -57,7 +57,7 @@ GenTest Engine/
 │   └── report_generator.py  # Builds Markdown, YAML, terminal reports
 ├── prompt/
 │   └── generate_report.yaml # AI prompt template (JSON-enforced)
-├── src/                     # Put your C++ source files here
+├── src/                     # Put your source code files here
 ├── report/                  # Generated analysis reports
 ├── cache/                   # Per-file cached LLM responses
 ├── requirements.txt
@@ -82,9 +82,9 @@ ollama pull qwen2.5-coder:1.5b
 pip install -r requirements.txt
 ```
 
-### 3. Add Your C++ Source Files
+### 3. Add Your Source Files
 
-Place `.cpp` / `.h` / `.cc` files into the `src/` folder.
+Place your code files into the `src/` folder.
 A sample `calculator.cpp` is included for quick testing.
 
 ### 4. Run the Analyzer
