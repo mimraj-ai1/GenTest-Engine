@@ -12,7 +12,7 @@ def findCppFiles(sourcePath):
             continue
 
         for fileName in fileNames:
-            if fileName.endswith(('.cpp', '.h', '.cc')):
+            if fileName.endswith(('.cpp', '.h', '.cc', '.hpp', '.cxx', '.c')):
                 fullFilePath = os.path.join(rootDir, fileName)
                 cppFileList.append(fullFilePath)
 
@@ -60,33 +60,32 @@ def main():
             analysisPrompt = generate_prompt(analysisInstruction, sourceCodeContent, currentFileName)
             llmOutput = query_llm(analysisPrompt)
 
-            if llmOutput:
-                # Validate JSON before caching to avoid storing malformed responses
-                try:
-                    jsonStart = llmOutput.find('{')
-                    jsonEnd = llmOutput.rfind('}') + 1
-                    json.loads(llmOutput[jsonStart:jsonEnd])
-                    with open(cachedResultPath, 'w', encoding='utf-8') as cacheFile:
-                        cacheFile.write(llmOutput)
-                    print("  [pass] - Analysis successful (and saved to cache).")
-                except json.JSONDecodeError:
-                    print("  [warn] - LLM returned invalid JSON; response NOT cached. Will retry next run.")
-                    continue
-            else:
-                print(f"  [fail] - Failed to get analysis for this file.\n")
+        if llmOutput:
+            try:
+                # Extract the JSON portion from the LLM output
+                jsonStart = llmOutput.find('{')
+                jsonEnd = llmOutput.rfind('}') + 1
+                
+                if jsonStart == -1 or jsonEnd <= jsonStart:
+                    raise json.JSONDecodeError("No JSON object found", llmOutput, 0)
+                    
+                cleanedJsonString = llmOutput[jsonStart:jsonEnd]
+                parsedAnalysis = json.loads(cleanedJsonString)
+                
+                # Write to cache only if it's valid JSON
+                with open(cachedResultPath, 'w', encoding='utf-8') as cacheFile:
+                    cacheFile.write(llmOutput)
+                    
+                aggregatedAnalyses.append(parsedAnalysis)
+                
+            except json.JSONDecodeError:
+                print("  [warn] - LLM returned invalid JSON. Deleting cache entry for re-analysis.")
+                if os.path.exists(cachedResultPath):
+                    os.remove(cachedResultPath)
                 continue
-
-        try:
-            jsonStartIndex = llmOutput.find('{')
-            jsonEndIndex = llmOutput.rfind('}') + 1
-            cleanedJsonString = llmOutput[jsonStartIndex:jsonEndIndex]
-
-            parsedAnalysis = json.loads(cleanedJsonString)
-            aggregatedAnalyses.append(parsedAnalysis)
-        except json.JSONDecodeError:
-            print(f"  [fail] - Cached response for '{currentFileName}' is invalid JSON. Deleting cache entry for re-analysis.")
-            if os.path.exists(cachedResultPath):
-                os.remove(cachedResultPath)
+        else:
+            print(f"  [fail] - Failed to get analysis for this file.\n")
+            continue
 
     print("\nGenerating final reports...")
     if not aggregatedAnalyses:
