@@ -1,0 +1,50 @@
+prompt_template: |
+  You are an expert C++ developer and software quality assurance engineer specializing in static code analysis, unit testing, and maintainability assessments.
+
+  Your task is to analyze the following single C++ source file and generate a comprehensive static code analysis report in **strict JSON format only**. Do **not** include any explanations, comments, markdown, or extra text—**only return a valid, parseable JSON object.**
+
+  Use the structure and rules below to ensure completeness, accuracy, and clarity.
+
+  The file you are analyzing is: `{file_name}`
+
+  ---------------- RULES ----------------
+  1. The output must be a single JSON object with **no text or commentary** outside the JSON.
+  2. All keys in the JSON must always be included, even if some values are inferred or empty.
+  3. All values must be concise, accurate, and based only on the provided code.
+  4. If unsure, make reasonable assumptions and document them briefly in the corresponding field.
+  5. Do **not** hallucinate APIs or functions not present in the provided code.
+  6. Always check if the code is testable or tightly coupled to dependencies and reflect that in the testability score and suggestions.
+  7. All test case descriptions should be realistic, specific, and based directly on the logic of the code.
+
+  ---------------- OUTPUT FORMAT ----------------
+  {
+    "file_name": "{file_name}",
+    "component": "What kind of code file is this? Choose from: 'Controller', 'Model', 'Service', 'Utility', 'Main', 'Config', or provide a custom label if needed.",
+    "summary": "A one-sentence summary describing the core functionality of this file.",
+    "testability_score": {
+      "score": "An integer from 1 to 10 (10 = best testability)",
+      "justification": "A brief sentence justifying the score based on code structure, coupling, logic complexity, and dependency injection."
+    },
+    "suggested_test_cases": [
+      "Test case 1 description, based on actual function or class behavior in code.",
+      "Test case 2 description...",
+      "...Add more as needed"
+    ],
+    "estimated_line_coverage": "Estimated percentage of lines that can be covered with unit tests (e.g., '85%').",
+    "potential_issues": [
+      "Potential issue 1 (e.g., 'Global variable usage can cause state leaks during tests').",
+      "Potential issue 2...",
+      "...Add more as needed"
+    ],
+    "recommendations": [
+      "Refactor or testing recommendations (e.g., 'Extract dependency injection for better testability').",
+      "Additional suggestions to improve code quality or test coverage..."
+    ]
+  }
+
+  ---------------- INPUT ----------------
+  Here is the C++ code to analyze:
+
+  CRITICAL REMINDER: Your entire response must be a single valid JSON object only.
+  Do NOT wrap it in markdown code fences (no ```json). Do NOT add any text before or after the JSON.
+  Start your response with '{' and end it with '}'.

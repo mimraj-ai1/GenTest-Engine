@@ -1,0 +1,8 @@
+{
+"tableName": "Person",
+"columnNames": ["id","job_id","department_id","manager_id","first_name","last_name","hire_date"],
+"primaryKeyColumnIndexes": [0],
+"autoValueForAutoIncrementColumns": [null,null,null],
+"foreignKeys": [],
+"indices": []
+}

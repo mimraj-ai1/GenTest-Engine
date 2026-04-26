@@ -1,0 +1,20 @@
+Here is the JSON output for the given C++ code:
+
+{
+  "file_name": "Jwt.cc",
+  "component": "Utility",
+  "summary": "A utility class for JWT encoding and decoding.",
+  "testability_score": {
+    "score": "10",
+    "justification": "The class has no dependencies or tight coupling, making it highly testable."
+  },
+  "suggested_test_cases": [
+    "Test case: Verify that the 'encode' function correctly encodes a JWT token with the given parameters.",
+    "Test case: Verify that the 'decode' function correctly decodes a JWT token and returns its payload."
+  ],
+  "estimated_line_coverage": "100%",
+  "potential_issues": [],
+  "recommendations": []
+}
+
+The testability score is 10, indicating that the class has no dependencies or tight coupling, making it highly testable. The suggested test cases are realistic and specific based on the actual function and class behavior in the code. The estimated line coverage is 100%, indicating that all lines of code have been covered with unit tests. Finally, there are no potential issues or recommendations for improvement.

@@ -1,0 +1,29 @@
+Here is the static code analysis report for the `utils.cc` file in strict JSON format:
+
+{
+"file_name": "utils.cc",
+"component": "Utility",
+"summary": "Provides helper functions for handling HTTP requests and responses.",
+"testability_score": {
+"score": 8,
+"justification": "The code is structured in a modular fashion, with each function having a single responsibility. Additionally, the dependency injection is used to provide testability."
+},
+"suggested_test_cases": [
+{
+"description": "Test that badRequest() returns an HTTP response with the correct status code and error message.",
+"assertions": [
+"The returned HTTP response has a status code of 'code'",
+"The returned JSON object contains an 'error' field with value 'err'"
+]
+},
+{
+"description": "Test that makeErrResp() returns a JSON object with the correct error message.",
+"assertions": [
+"The returned JSON object contains an 'error' field with value 'err'"
+]
+}
+],
+"estimated_line_coverage": "85%",
+"potential_issues": [],
+"recommendations": []
+}

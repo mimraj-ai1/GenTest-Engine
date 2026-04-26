@@ -1,0 +1,21 @@
+{
+  "file_name": "utils.h",
+  "component": "Utility",
+  "summary": "Provides utility functions for handling HTTP requests and responses.",
+  "testability_score": {
+    "score": 8,
+    "justification": "The file includes a function for handling bad requests with custom error messages, which can be tested by mocking the callback function."
+  },
+  "suggested_test_cases": [
+    "Test that the `badRequest` function correctly sets the HTTP status code and response body for a custom error message.",
+    "Test that the `makeErrResp` function correctly creates a JSON object with the specified error message."
+  ],
+  "estimated_line_coverage": "85%",
+  "potential_issues": [
+    "Global variable usage can cause state leaks during tests"
+  ],
+  "recommendations": [
+    "Refactor to use dependency injection for better testability.",
+    "Consider using a testing framework that provides built-in support for HTTP mocking."
+  ]
+}

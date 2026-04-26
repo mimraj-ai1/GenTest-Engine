@@ -1,0 +1,119 @@
+{
+"name": "PersonsController",
+"description": "This is the description of the PersonsController class.",
+"class_name": "PersonsController",
+"module_name": "drogon_orm",
+"methods": [
+{
+"name": "getDirectReports",
+"parameters": [
+{
+"type": "int",
+"name": "personId"
+}
+],
+"return_type": "void"
+},
+{
+"name": "deleteOne",
+"parameters": [
+{
+"type": "int",
+"name": "personId"
+}
+],
+"return_type": "void"
+},
+{
+"name": "updateOne",
+"parameters": [
+{
+"type": "int",
+"name": "personId"
+},
+{
+"type": "Person",
+"name": "pPerson"
+}
+],
+"return_type": "void"
+},
+{
+"name": "createOne",
+"parameters": [
+{
+"type": "Person",
+"name": "pPerson"
+}
+],
+"return_type": "void"
+},
+{
+"name": "getOne",
+"parameters": [
+{
+"type": "int",
+"name": "personId"
+}
+],
+"return_type": "void"
+},
+{
+"name": "getAll",
+"parameters": [],
+"return_type": "void"
+},
+{
+"name": "createTable",
+"parameters": [],
+"return_type": "void"
+},
+{
+"name": "dropTable",
+"parameters": [],
+"return_type": "void"
+}
+],
+"variables": [
+{
+"type": "int",
+"name": "id"
+},
+{
+"type": "string",
+"name": "first_name"
+},
+{
+"type": "string",
+"name": "last_name"
+},
+{
+"type": "Date",
+"name": "hire_date"
+},
+{
+"type": "int",
+"name": "manager_id"
+},
+{
+"type": "string",
+"name": "manager_full_name"
+},
+{
+"type": "int",
+"name": "department_id"
+},
+{
+"type": "string",
+"name": "department_name"
+},
+{
+"type": "int",
+"name": "job_id"
+},
+{
+"type": "string",
+"name": "job_title"
+}
+]
+}
