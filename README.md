@@ -2,7 +2,7 @@
 
 **GenTest Engine** is an AI-powered static analysis tool for C++ projects that automatically generates test scenarios and predicts code coverage — **without compiling or executing any code**.
 
-> Built and extended by **Mimraj** · Inspired by open-source C++ analysis tooling
+> Built and extended by **SK Mimraj** · Inspired by open-source C++ analysis tooling
 > Original concept: [aarabii/CppTestGenAI](https://github.com/aarabii/CppTestGenAI) (MIT-style, no license file)
 
 ---
