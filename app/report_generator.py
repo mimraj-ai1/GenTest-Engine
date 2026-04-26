@@ -48,7 +48,7 @@ def generate_all_reports(fileAnalysisList):
         "final_coverage_report": {
             "coverage_by_component": [],
             "overall_estimated_coverage": f"{totalCoverageSum / analyzedFileCount if analyzedFileCount > 0 else 0:.2f}%",
-            "recommendations": "Review the detailed component reports for specific test cases. Focus on improving the testability of components with low scores. Consider adding integration tests for how controllers and models interact."
+            "recommendations": []
         }
     }
 
@@ -70,6 +70,19 @@ def generate_all_reports(fileAnalysisList):
             "coverage": averageComponentCoverage
         })
 
+        for fileData in componentFiles:
+            if 'recommendations' in fileData and isinstance(fileData['recommendations'], list):
+                for rec in fileData['recommendations']:
+                    if rec not in aggregatedReportData["final_coverage_report"]["recommendations"]:
+                        aggregatedReportData["final_coverage_report"]["recommendations"].append(rec)
+        
+    # If no recommendations were found, add a generic one
+    if not aggregatedReportData["final_coverage_report"]["recommendations"]:
+        aggregatedReportData["final_coverage_report"]["recommendations"] = [
+            "Review component reports for specific test cases.", 
+            "Focus on improving testability of complex files."
+        ]
+
     summaryReportPath = os.path.join(reportDirectory, 'coverage_summary_report.md')
     with open(summaryReportPath, 'w', encoding='utf-8') as summaryFile:
         summaryFile.write("# Overall Project Analysis Report\n\n")
@@ -85,7 +98,11 @@ def generate_all_reports(fileAnalysisList):
                 summaryFile.write(f"  - {componentInfo.get('component', 'N/A')}: {componentInfo.get('coverage', 'N/A')}\n")
 
         summaryFile.write("\n## Recommendations\n")
-        summaryFile.write(f"{coverageReport.get('recommendations', 'N/A')}\n")
+        if isinstance(coverageReport.get('recommendations'), list):
+            for idx, rec in enumerate(coverageReport['recommendations'], 1):
+                summaryFile.write(f"{idx}. {rec}\n")
+        else:
+            summaryFile.write(f"{coverageReport.get('recommendations', 'None')}\n")
 
     return aggregatedReportData
 
@@ -119,8 +136,13 @@ def print_terminal_report(reportData):
     print(f"{'OVERALL ESTIMATED COVERAGE':<30} | {overallCoverage:>20}")
     print("="*60)
 
-    if 'recommendations' in coverageReport:
+    if 'recommendations' in coverageReport and coverageReport['recommendations']:
         print("\nRECOMMENDATIONS:\n")
-        print(coverageReport.get('recommendations', 'N/A'))
+        if isinstance(coverageReport['recommendations'], list):
+            for idx, rec in enumerate(coverageReport['recommendations'], 1):
+                # Ensure no crazy terminal mangling with long strings
+                print(f"  {idx}. {rec[:100]}..." if len(rec) > 100 else f"  {idx}. {rec}")
+        else:
+            print(f"  {coverageReport['recommendations']}")
 
     print("\n")
