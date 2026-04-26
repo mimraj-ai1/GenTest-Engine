@@ -113,9 +113,14 @@ llmModelName = "qwen2.5-coder:1.5b"   # Change to any Ollama-supported model
 ============================================================
 Component                      |   Estimated Coverage
 ------------------------------------------------------------
-Service                        |              100.00%
+Controller                     |               85.83%
+Uncategorized                  |                0.00%
+Model                          |               90.00%
+Utility                        |               90.00%
+Service                        |               85.00%
+Main                           |              100.00%
 ------------------------------------------------------------
-OVERALL ESTIMATED COVERAGE     |              100.00%
+OVERALL ESTIMATED COVERAGE     |               80.80%
 ============================================================
 ```
 
