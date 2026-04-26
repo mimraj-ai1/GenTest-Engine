@@ -12,7 +12,7 @@
 GenTest Engine analyzes your C++ codebase and:
 
 - Scans all `.cpp`, `.cc`, and `.h` files in the `src/` directory
-- Sends each file to a local AI model (via [Ollama](https://ollama.ai) using **CodeLlama 7B**) for expert-level static analysis
+- Sends each file to a local AI model (via [Ollama](https://ollama.ai) using **Qwen2.5-Coder 1.5B**) for expert-level static analysis
 - Predicts potential test cases and estimated code coverage — **no runtime execution needed**
 - Stores and reuses analysis using a **file-based caching system**
 - Generates detailed reports in **Markdown**, **YAML**, and **terminal** formats
@@ -31,6 +31,7 @@ No compilers. No linkers. No build steps. Just smart analysis.
 | Prompt JSON enforcement | Basic | ✅ Hardened with CRITICAL REMINDER footer |
 | Request timeout | ❌ | ✅ 120s timeout per request |
 | Sample C++ test file | ❌ | ✅ `calculator.cpp` included |
+| Lightweight Model | ❌ (Used heavy 7B model) | ✅ `qwen2.5-coder:1.5b` for memory stability |
 
 ---
 
@@ -73,7 +74,7 @@ GenTest Engine/
 Download from [ollama.ai](https://ollama.ai), then:
 
 ```bash
-ollama pull codellama:7b
+ollama pull qwen2.5-coder:1.5b
 ```
 
 ### 2. Install Python Requirements
@@ -100,7 +101,7 @@ python -m app.main
 Edit `app/config.py` to change the model or paths:
 
 ```python
-llmModelName = "codellama:7b"   # Change to any Ollama-supported model
+llmModelName = "qwen2.5-coder:1.5b"   # Change to any Ollama-supported model
 ```
 
 ---
@@ -113,13 +114,9 @@ llmModelName = "codellama:7b"   # Change to any Ollama-supported model
 ============================================================
 Component                      |   Estimated Coverage
 ------------------------------------------------------------
-Controller                     |               85.83%
-Model                          |               90.00%
-Utility                        |               90.00%
-Service                        |               85.00%
-Main                           |              100.00%
+Service                        |              100.00%
 ------------------------------------------------------------
-OVERALL ESTIMATED COVERAGE     |               80.80%
+OVERALL ESTIMATED COVERAGE     |              100.00%
 ============================================================
 ```
 
@@ -128,7 +125,7 @@ OVERALL ESTIMATED COVERAGE     |               80.80%
 ## 📋 Features
 
 - ⚡ **No Build Required** — Purely static analysis
-- 🧠 **AI-Powered** — CodeLlama 7B via local Ollama server
+- 🧠 **AI-Powered** — Qwen2.5-Coder 1.5B via local Ollama server (Lightweight & Fast)
 - 🔁 **Retry Logic** — Auto-retries failed API calls with backoff
 - 📁 **Validated Caching** — Only stores valid JSON responses
 - 📊 **Multi-Format Reports** — Markdown, YAML, and terminal
@@ -153,7 +150,7 @@ ollama serve
 
 **Model not found?**
 ```bash
-ollama pull codellama:7b
+ollama pull qwen2.5-coder:1.5b
 ```
 
 **`ollama` not recognized in terminal?**
@@ -175,5 +172,5 @@ This customized version is published for portfolio and educational purposes with
 ## 🙏 Credits
 
 - Original concept by [aarabii](https://github.com/aarabii/CppTestGenAI)
-- Extended and improved by **Mimraj**
-- Powered by [Ollama](https://ollama.ai) + [CodeLlama](https://github.com/facebookresearch/codellama) by Meta AI
+- Extended and improved by **SK Mimraj**
+- Powered by [Ollama](https://ollama.ai) + [Qwen2.5-Coder](https://github.com/QwenLM/Qwen2.5-Coder) by Alibaba Cloud
