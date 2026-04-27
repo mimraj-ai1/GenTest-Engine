@@ -36,10 +36,29 @@ No compilers. No linkers. No build steps. Just smart analysis.
 
 ## 🧠 System Architecture
 
-The tool follows a modular, build-free pipeline:
+![System Architecture](C:\Users\sekhm\.gemini\antigravity\brain\c8a0ccea-1c00-4f85-b585-2b3391768639\system_architecture_diagram_1777255518386.png)
 
-1. **Initialization** — Run `python -m app.main` to start
-2. **Source Scanning** — Walks `src/` for supported source files
+The tool follows a modular, build-free pipeline powered by local LLM inference:
+
+```mermaid
+graph TD
+    A[Source Files .cpp, .py, .java] --> B{Cache Check}
+    B -- Found --> C[Load Cached JSON]
+    B -- Not Found --> D[Ollama AI Analysis]
+    D --> E[JSON Validation]
+    E -- Valid --> F[Save to Cache]
+    F --> G[Aggregate Results]
+    C --> G
+    G --> H[Markdown Reports]
+    G --> I[YAML Report]
+    G --> J[Terminal Dashboard]
+    
+    style D fill:#2d3436,stroke:#0984e3,stroke-width:2px,color:#fff
+    style G fill:#2d3436,stroke:#6c5ce7,stroke-width:2px,color:#fff
+```
+
+1. **Source Scanning** — Walks `src/` for supported source files
+2. **Initialization** — Run `python -m app.main` to start
 3. **Cache-First Workflow** — Reuses previous analysis if cached and valid
 4. **AI Analysis** — LLM returns structured JSON with coverage predictions
 5. **Reporting** — Markdown + YAML + terminal summary generated
@@ -105,7 +124,8 @@ llmModelName = "qwen2.5-coder:1.5b"   # Change to any Ollama-supported model
 
 ---
 
-## 📊 Sample Output
+## 📊 Sample Output screenshot
+![alt text](<Screenshot 2026-04-27 054610.png>)
 
 ```
 ============================================================
