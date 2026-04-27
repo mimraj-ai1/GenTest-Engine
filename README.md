@@ -36,7 +36,7 @@ No compilers. No linkers. No build steps. Just smart analysis.
 
 ## 🧠 System Architecture
 
-![System Architecture](C:\Users\sekhm\.gemini\antigravity\brain\c8a0ccea-1c00-4f85-b585-2b3391768639\system_architecture_diagram_1777255518386.png)
+![System Architecture](docs/images/system_architecture.png)
 
 The tool follows a modular, build-free pipeline powered by local LLM inference:
 
@@ -103,7 +103,7 @@ pip install -r requirements.txt
 
 ### 3. Add Your Source Files
 
-Place your code files into the `src/` folder.
+Place your code files (C++, Java, Python, JS, etc.) into the `src/` folder.
 A sample `calculator.cpp` is included for quick testing.
 
 ### 4. Run the Analyzer
@@ -124,8 +124,7 @@ llmModelName = "qwen2.5-coder:1.5b"   # Change to any Ollama-supported model
 
 ---
 
-## 📊 Sample Output screenshot
-![alt text](<Screenshot 2026-04-27 054610.png>)
+![Sample Terminal Output](docs/images/terminal_output.png)
 
 ```
 ============================================================
